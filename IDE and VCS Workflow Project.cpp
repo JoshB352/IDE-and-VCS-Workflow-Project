@@ -4,10 +4,12 @@
 #include <iostream>
 using namespace std;
 int main() {
-    char first, middle, last;
-    first = 'J';
-    middle = 'A';
-    last = 'D';
-    cout << first << middle << last << endl;
+    string name, address, phoneNumber;
+    name = "Joshua Budd";
+    address = "542 Goober Dr.";
+    phoneNumber = "757-757-7575";
+    cout << name << endl;
+    cout << address << endl;
+    cout << phoneNumber << endl;
     return 0;
 }
