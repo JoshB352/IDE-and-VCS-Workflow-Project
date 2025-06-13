@@ -7,12 +7,7 @@ int main() {
     char first, middle, last;
     first = 'J';
     middle = 'A';
-    last = 'B';
-    char wFirst, wMiddle, wLast;
-    wFirst = 'Josh';
-    wMiddle = 'Alan';
-    wLast = 'Budd';
+    last = 'D';
     cout << first << middle << last << endl;
-    cout << wFirst << wMiddle << wLast << endl;
     return 0;
 }
