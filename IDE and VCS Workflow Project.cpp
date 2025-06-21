@@ -11,7 +11,7 @@ int main()
 	percent2 = 58;
 	surveyAmount = 16500;
 
-	double whoPurchased, citrusPreferred;
+	int whoPurchased, citrusPreferred;
 
 	// Calculate amount of people based on the percentages.
 	whoPurchased = surveyAmount * percent1 / 100;
