@@ -1,30 +1,27 @@
-// Program displays how much the ocean level has risen in the given number of years. (Assuming it raises 1.5 millimeters per year.)
+// Program displays distance able to be traveled in town versus on the highway. (Assuming 20 gallons of gas are in the tank.)
 
 #include <iostream>
 using namespace std;
 int main()
 {
-	int years1, years2, years3;
+	double townGallonMile, highwayGallonMile;
 
-	double riseAmount = 1.5;
+	// Average miles per gallon when driven in town versus the highway.
+	townGallonMile = 23.5;
+	highwayGallonMile = 28.9;
 
-	years1 = 5;
-	years2 = 7;
-	years3 = 10;
+	// Gallons of gas in the tank
+	int gallons = 20;
 
-	double oceanLevel1, oceanLevel2, oceanLevel3;
+	double townDistance, highwayDistance;
 
-	// Calculating how much the ocean level will rise.
-	oceanLevel1 = riseAmount * years1;
-	oceanLevel2 = riseAmount * years2;
-	oceanLevel3 = riseAmount * years3;
+	// Calculate distance
+	townDistance = townGallonMile * gallons;
+	highwayDistance = highwayGallonMile * gallons;
 
-	// Tell how much the ocean level rises per year and display the calculations.
-	cout << "Assuming the ocean level rises " << riseAmount << " millimeters per year:" << endl;
-
-	cout << "The ocean levels after " << years1 << " years would be " << oceanLevel1 << " millimeters higher." << endl;
-	cout << "The ocean levels after " << years2 << " years would be " << oceanLevel2 << " millimeters higher." << endl;
-	cout << "The ocean levels after " << years3 << " years would be " << oceanLevel3 << " millimeters higher." << endl;
+	// Display calculations to the program user.
+	cout << "On " << gallons << " gallons of gas while driving in town at an average of " << townGallonMile << " miles per gallon. The distance able to be traveled is: " << townDistance << " miles." << endl;
+	cout << "On " << gallons << " gallons of gas while driving on the highway at an average of " << highwayGallonMile << " miles per gallon. The distance able to be traveled is: " << highwayDistance << " miles." << endl;
 
 	return 0;
 }
