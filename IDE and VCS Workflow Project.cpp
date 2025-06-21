@@ -19,7 +19,7 @@ int main()
 
 	// Display calculations to the program user.
 	cout << "Out of the " << surveyAmount << " people who took the survey, 15% (" << whoPurchased << ") of them buy one or more energy drinks per week." << endl;
-	cout << "Out of the " << whoPurchased << " people who buy one or more energy drinks per week, 58% (" << citrusPrefered << ") prefer citrus-flavored energy drink." << endl;
+	cout << "Out of the " << whoPurchased << " people who buy one or more energy drinks per week, 58% (" << citrusPreferred << ") prefer citrus-flavored energy drink." << endl;
 
 	return 0;
 }
