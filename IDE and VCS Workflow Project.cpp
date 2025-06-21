@@ -1,27 +1,25 @@
-// Program displays distance able to be traveled in town versus on the highway. (Assuming 20 gallons of gas are in the tank.)
+// Program displays the approximate number of customers in the survey purchasing one or more energy drinks per week. And, of those who purchase one or more a week, the approximate number of customers preferring citrus-flavored energy drinks.
 
 #include <iostream>
 using namespace std;
 int main()
 {
-	double townGallonMile, highwayGallonMile;
+	int percent1, percent2, surveyAmount;
+	
+	// 16,500 people took the survey, out of those people 15% buy energy drinks once or more a week. And out of thos who buy once or more a week, 58% prefer citrus-flavored energy drinks.
+	percent1 = 15;
+	percent2 = 58;
+	surveyAmount = 16500;
 
-	// Average miles per gallon when driven in town versus the highway.
-	townGallonMile = 23.5;
-	highwayGallonMile = 28.9;
+	double whoPurchased, flavorFavour;
 
-	// Gallons of gas in the tank
-	int gallons = 20;
-
-	double townDistance, highwayDistance;
-
-	// Calculate distance
-	townDistance = townGallonMile * gallons;
-	highwayDistance = highwayGallonMile * gallons;
+	// Calculate amount of people based on the percentages.
+	whoPurchased = surveyAmount * percent1 / 100;
+	flavorFavour = whoPurchased * percent2 / 100;
 
 	// Display calculations to the program user.
-	cout << "On " << gallons << " gallons of gas while driving in town at an average of " << townGallonMile << " miles per gallon. The distance able to be traveled is: " << townDistance << " miles." << endl;
-	cout << "On " << gallons << " gallons of gas while driving on the highway at an average of " << highwayGallonMile << " miles per gallon. The distance able to be traveled is: " << highwayDistance << " miles." << endl;
+	cout << "Out of the " << surveyAmount << " people who took the survey, 15% (" << whoPurchased << ") percent of them buy one or more energy drinks per week." << endl;
+	cout << "Out of the " << whoPurchased << " people who buy one or more energy drinks per week, 58% (" << flavorFavour << ") prefer citrus-flavored energy drink." << endl;
 
 	return 0;
 }
