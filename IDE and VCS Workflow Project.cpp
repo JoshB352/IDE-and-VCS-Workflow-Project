@@ -18,7 +18,7 @@ int main()
 	citrusPrefered = whoPurchased * percent2 / 100;
 
 	// Display calculations to the program user.
-	cout << "Out of the " << surveyAmount << " people who took the survey, 15% (" << whoPurchased << ") percent of them buy one or more energy drinks per week." << endl;
+	cout << "Out of the " << surveyAmount << " people who took the survey, 15% (" << whoPurchased << ") of them buy one or more energy drinks per week." << endl;
 	cout << "Out of the " << whoPurchased << " people who buy one or more energy drinks per week, 58% (" << citrusPrefered << ") prefer citrus-flavored energy drink." << endl;
 
 	return 0;
