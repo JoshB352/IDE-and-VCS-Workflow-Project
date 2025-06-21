@@ -11,11 +11,11 @@ int main()
 	percent2 = 58;
 	surveyAmount = 16500;
 
-	double whoPurchased, citrusPrefered;
+	double whoPurchased, citrusPreferred;
 
 	// Calculate amount of people based on the percentages.
 	whoPurchased = surveyAmount * percent1 / 100;
-	citrusPrefered = whoPurchased * percent2 / 100;
+	citrusPreferred = whoPurchased * percent2 / 100;
 
 	// Display calculations to the program user.
 	cout << "Out of the " << surveyAmount << " people who took the survey, 15% (" << whoPurchased << ") of them buy one or more energy drinks per week." << endl;
