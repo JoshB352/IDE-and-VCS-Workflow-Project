@@ -14,10 +14,13 @@ int main()
 
 	double oceanLevel1, oceanLevel2, oceanLevel3;
 
-	// Calculating how much the ocean level will rise 
+	// Calculating how much the ocean level will rise.
 	oceanLevel1 = riseAmount * years1;
 	oceanLevel2 = riseAmount * years2;
 	oceanLevel3 = riseAmount * years3;
+
+	// Tell how much the ocean level rises per year and display the calculations.
+	cout << "Assuming the ocean level rises " << riseAmount << " millimeters per year:" << endl;
 
 	cout << "The ocean levels after " << years1 << " years would be " << oceanLevel1 << " millimeters higher." << endl;
 	cout << "The ocean levels after " << years2 << " years would be " << oceanLevel2 << " millimeters higher." << endl;
