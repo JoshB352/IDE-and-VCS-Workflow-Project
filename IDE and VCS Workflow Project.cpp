@@ -1,30 +1,36 @@
-// Program displays how much the ocean level has risen in the given number of years. (Assuming it raises 1.5 millimeters per year.)
+// Program displays how much ingredients are needed, in cups, for amount of cookies input.
 
 #include <iostream>
+#include <iomanip>
 using namespace std;
 int main()
 {
-	int years1, years2, years3;
+	int cookieAmount;
 
-	double riseAmount = 1.5;
+	double const sugarInCups = 1.5 / 48;
+	double const flourInCups = 2.75 / 48;
+	double const butterInCups = 1.0 / 48;
 
-	years1 = 5;
-	years2 = 7;
-	years3 = 10;
+	double neededSugar, neededFlour, neededButter;
+	
+	// Get amount of cookies that are wanted
 
-	double oceanLevel1, oceanLevel2, oceanLevel3;
+	cout << "How many cookies do you want to make?" << endl;
+	cin >> cookieAmount;
 
-	// Calculating how much the ocean level will rise.
-	oceanLevel1 = riseAmount * years1;
-	oceanLevel2 = riseAmount * years2;
-	oceanLevel3 = riseAmount * years3;
+	// Calculate ingredients needed based on user input
 
-	// Tell how much the ocean level rises per year and display the calculations.
-	cout << "Assuming the ocean level rises " << riseAmount << " millimeters per year:" << endl;
+	neededSugar = sugarInCups * cookieAmount;
+	neededFlour = flourInCups * cookieAmount;
+	neededButter = butterInCups * cookieAmount;
 
-	cout << "The ocean levels after " << years1 << " years would be " << oceanLevel1 << " millimeters higher." << endl;
-	cout << "The ocean levels after " << years2 << " years would be " << oceanLevel2 << " millimeters higher." << endl;
-	cout << "The ocean levels after " << years3 << " years would be " << oceanLevel3 << " millimeters higher." << endl;
+	// Display calculation 
+
+	cout << fixed << setprecision(2);
+	cout << "This is the amount of each ingredient you will need, in cups:\n";
+	cout << "Amount of sugar needed in cups: " << setw(6) << neededSugar << endl;
+	cout << "Amount of flour needed in cups: " << setw(6) << neededFlour << endl;
+	cout << "Amount of butter needed in cups: " << setw(6) << neededButter << endl;
 
 	return 0;
 }
