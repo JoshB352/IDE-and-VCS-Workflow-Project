@@ -2,32 +2,41 @@
 
 #include <iostream>
 #include <iomanip>
-#include <random>
+#include <cmath>
 using namespace std;
 int main()
 {
-	const int MIN = 1;
-	const int MAX = 999;
+	double rate;
+	double principal;
+	int timesCompunded;
 
-	// Set random number engine and distribition objects
+	// Get Principal, interest rate, and times compounded.
+	cout << "What is your principal?\n";
+	cin >> principal;
+	cin.ignore();
 
-	random_device ranEngine;
-	uniform_int_distribution<int> firstNumber(MIN, MAX);
-	uniform_int_distribution<int> secondNumber(MIN, MAX);
+	cout << "What is the interest rate?\n";
+	cin >> rate;
+	cin.ignore();
+
+	// turn the rate into decimal form
+	double rateInDecimal = rate / 100;
+
+	cout << "How many times is it compounded in a year?\n";
+	cin >> timesCompunded;
+	
 
 	// Calculate answer
-	int number1 = firstNumber(ranEngine);
-	int number2 = secondNumber(ranEngine);
+	double amount = principal * pow(1 + (rateInDecimal / timesCompunded), timesCompunded);
+	double interestEarned = amount - principal;
 
-	int answer = number1 + number2;
-
-	// Display numbers generated and, after user presses a key, the answer.
-
-	cout << "Here is your addition math problem! Press the \"Enter\" key when you're ready for the answer.\n";
-	cout << setw(7) << number1 << endl;
-	cout << "+" << setw(6) << number2 << "\n________";
-	cin.get();
-	cout << setw(7) << answer << "\nHere is the answer! Did you get it right?" << endl;
+	// Display numbers and the answer.
+	cout << fixed << setprecision(2);
+	cout << "Interest rate:" << setw(20) << rate << "%" << endl;
+	cout << "Times compounded:" << setw(17) << timesCompunded << endl;
+	cout << "Principal: $" << setw(22) << principal << endl;
+	cout << "Interest: $" << setw(23) << interestEarned << endl;
+	cout << "Amount in savings:$" << setw(15) << amount << endl;
 
 	return 0;
 }
