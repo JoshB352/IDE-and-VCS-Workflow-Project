@@ -1,36 +1,33 @@
-// Program displays how much ingredients are needed, in cups, for amount of cookies input.
+// Program serves as a math tutor, displaying a problem, and upon the user pressing the "Enter" key, displays the answer.
 
 #include <iostream>
 #include <iomanip>
+#include <random>
 using namespace std;
 int main()
 {
-	int cookieAmount;
+	const int MIN = 1;
+	const int MAX = 999;
 
-	double const sugarInCups = 1.5 / 48;
-	double const flourInCups = 2.75 / 48;
-	double const butterInCups = 1.0 / 48;
+	// Set random number engine and distribition objects
 
-	double neededSugar, neededFlour, neededButter;
-	
-	// Get amount of cookies that are wanted
+	random_device ranEngine;
+	uniform_int_distribution<int> firstNumber(MIN, MAX);
+	uniform_int_distribution<int> secondNumber(MIN, MAX);
 
-	cout << "How many cookies do you want to make?" << endl;
-	cin >> cookieAmount;
+	// Calculate answer
+	int number1 = firstNumber(ranEngine);
+	int number2 = secondNumber(ranEngine);
 
-	// Calculate ingredients needed based on user input
+	int answer = number1 + number2;
 
-	neededSugar = sugarInCups * cookieAmount;
-	neededFlour = flourInCups * cookieAmount;
-	neededButter = butterInCups * cookieAmount;
+	// Display numbers generated and, after user presses a key, the answer.
 
-	// Display calculation 
-
-	cout << fixed << setprecision(2);
-	cout << "This is the amount of each ingredient you will need, in cups:\n";
-	cout << "Amount of sugar needed in cups: " << setw(6) << neededSugar << endl;
-	cout << "Amount of flour needed in cups: " << setw(6) << neededFlour << endl;
-	cout << "Amount of butter needed in cups: " << setw(6) << neededButter << endl;
+	cout << "Here is your addition math problem! Press the \"Enter\" key when you're ready for the answer.\n";
+	cout << setw(7) << number1 << endl;
+	cout << "+" << setw(6) << number2 << "\n________";
+	cin.get();
+	cout << setw(7) << answer << "\nHere is the answer! Did you get it right?" << endl;
 
 	return 0;
 }
