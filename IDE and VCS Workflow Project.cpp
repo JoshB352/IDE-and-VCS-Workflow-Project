@@ -1,42 +1,87 @@
-// Program serves as a math tutor, displaying a problem, and upon the user pressing the "Enter" key, displays the answer.
+// Program prompts the user to enter a month (1-12) and a year. If the month is Februrary (2), the program checks if the year enter is a leap year, then it acts accordingly
+// PS. If using a switch is better in this situation, could you let me know in your comment? Thank you in advance.
 
 #include <iostream>
-#include <iomanip>
-#include <cmath>
 using namespace std;
 int main()
 {
-	double rate;
-	double principal;
-	int timesCompunded;
+	int year;
+	int month;
 
-	// Get Principal, interest rate, and times compounded.
-	cout << "What is your principal?\n";
-	cin >> principal;
+	// Get the month (1 - 12) and the year
+	cout << "Enter a month (1-12):\n";
+	cin >> month;
 	cin.ignore();
 
-	cout << "What is the interest rate?\n";
-	cin >> rate;
+	cout << "Enter a year:\n";
+	cin >> year;
 	cin.ignore();
 
-	// turn the rate into decimal form
-	double rateInDecimal = rate / 100;
-
-	cout << "How many times is it compounded in a year?\n";
-	cin >> timesCompunded;
+	// Check if the month is within range (1 - 12)
+	if (month >= 1 && month <= 12)
+	{
+		if (month == 1)
+		{
+			cout << "There are 31 days in the month January in " << year << "." << endl;
+		}
+		else if (month == 2)
+		{	
+			// Check if the year entered is a leap year, acting accordingly.
+			if ((year % 4 == 0 && year % 100 != 0) || (year % 400 == 0))
+			{
+				cout << "There are 29 days in the month of Februrary, in the year " << year << ", since it is a leap year!" << endl;
+			}
+			else
+			{
+				cout << "There are 28 days in the month of February, in the year " << year << "." << endl;
+			}
+			
+		}
+		else if (month == 3)
+		{
+			cout << "There are 31 days in the month of March, in the year " << year << "." << endl;
+		}
+		else if (month == 4)
+		{
+			cout << "There are 30 days in the month of April, in the year " << year << "." << endl;
+		}
+		else if (month == 5)
+		{
+			cout << "There are 31 days in the month of May, in the year " << year << "." << endl;
+		}
+		else if (month == 6)
+		{
+			cout << "There are 30 days in the month of June, in the year " << year << "." << endl;
+		}
+		else if (month == 7)
+		{
+			cout << "There are 31 days in the month of July, in the year " << year << "." << endl;
+		}
+		else if (month == 8)
+		{
+			cout << "There are 31 days in the month of August, in the year " << year << "." << endl;
+		}
+		else if (month == 9)
+		{
+			cout << "There are 30 days in the month of September, in the year " << year << "." << endl;
+		}
+		else if (month == 10)
+		{
+			cout << "There are 31 days in the month of October, in the year " << year << "." << endl;
+		}
+		else if (month == 11)
+		{
+			cout << "There are 30 days in the month of November, in the year " << year << "." << endl;
+		}
+		else if (month == 12)
+		{
+			cout << "There are 31 days in the month of December, in the year " << year << "." << endl;
+		}
+	}
+	else
+	{
+		cout << "Invalid input! Please rerun the progam and enter a value between 1 and 12 for the month.";
+	}
 	
-
-	// Calculate answer
-	double amount = principal * pow(1 + (rateInDecimal / timesCompunded), timesCompunded);
-	double interestEarned = amount - principal;
-
-	// Display numbers and the answer.
-	cout << fixed << setprecision(2);
-	cout << "Interest rate:" << setw(20) << rate << "%" << endl;
-	cout << "Times compounded:" << setw(17) << timesCompunded << endl;
-	cout << "Principal: $" << setw(22) << principal << endl;
-	cout << "Interest: $" << setw(23) << interestEarned << endl;
-	cout << "Amount in savings:$" << setw(15) << amount << endl;
-
 	return 0;
 }
