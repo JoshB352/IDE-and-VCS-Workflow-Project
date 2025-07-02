@@ -1,78 +1,99 @@
-// Program prompts the user to enter a weight (1 - 20) and a distance (10 - 3,000) then shows then what they'll be charged.
+// Program serves as a geometry calculator.
 
 #include <iostream>
 #include <iomanip>
+#include <cmath>
 using namespace std;
 int main()
 {
-	double rate;
-	double miles;
-	double chargeTimes; // How many times is the mile rate charged?
-	double charges;
-	double weight;
+	int choice;
+	const long double pi = 3.14159;
+	// Make the loop
+	do {
+		// Give user choices and get input for choice selected.
+		cout << "Geometry Calculator" << endl;
+		cout << "	1. Caluclate the Area of a Circle" << endl;
+		cout << "	2. Caluclate the Area of a Rectangle" << endl;
+		cout << "	3. Caluclate the Area of a Triangle" << endl;
+		cout << "	4. Quit" << endl;
+		cout << "	Enter your choice (1-4) :" << endl;
+		cin >> choice;
 
-	// Get weigth of the package and disance it will travel
-	cout << "Enter the weight of your package in kilograms. (Note that the company will not ship weights below 0kg, or above 20kg)\n";
-	cin >> weight;
-	cin.ignore();
-
-	cout << "Enter the distance, in miles, the package will be shipped. (Note that the company will not ship distances less than 10mi, or greater than 3,000mi.\n";
-	cin >> miles;
-	cin.ignore();
-
-	// Check if the weight and distance meets the criteria, then based on that display the charges.
-	if (weight > 0 && weight <= 20 && miles >= 10 && miles <= 3000)
-	{
-		cout << fixed << showpoint << setprecision(2);
-		if (weight < 2)
+		cout << fixed << setprecision(2);
+		// Detect if input is valid for choice
+		if (1 <= choice && choice <= 4)
 		{
-			rate = 1.10;
-			chargeTimes = miles / 500.00;
-			charges = chargeTimes * rate;
-
-			cout << "The distance you want to ship your package, in miles, is: " << miles << endl;
-			cout << "The weight of your package you want to ship, in kilograms, is: " << weight << endl;
-			cout << "The rate for the distance entered is: " << rate << "$" << endl;
-			cout << "You will be charged: " << charges << "$" << endl;
+			// Set what each choice leads to, and detect invalid input.
+			if (choice == 1)
+			{
+				cout << "Enter the radius of the circle: (The program does not accept negative numbers.)\n";
+				double radius;
+				cin >> radius;
+				if (radius < 0)
+				{
+					cout << "Invalid input, please rerun the program and input a positive number for the radius";
+				}
+				else
+				{
+					double area = pow(radius, 2) * pi;
+					cout << "The area of the circle is: " << area << endl;
+				}
+			}
+			else if (choice == 2)
+			{
+				cout << "Enter the the length of the rectangle: (The program does not accept negative numbers.)\n";
+				double length;
+				cin >> length;
+				cout << "Enter the width of the rectangle: (The program does not accept negative numbers.)\n";
+				double width;
+				cin >> width;
+				if (length < 0)
+				{
+					cout << "Invalid input, please rerun the program and input a positive number for the radius";
+				}
+				else if (width < 0)
+				{
+					cout << "Invalid input, please rerun the program and input a positive number for the radius";
+				}
+				else
+				{
+					double area = length * width;
+					cout << "The area of the rectangle is: " << area << endl;
+				}
+			}
+			else if (choice == 3)
+			{
+				cout << "Enter the the length of the triangle: (The program does not accept negative numbers.)\n";
+				double base;
+				cin >> base;
+				cout << "Enter the width of the triangle: (The program does not accept negative numbers.)\n";
+				double height;
+				cin >> height;
+				if (base < 0)
+				{
+					cout << "Invalid input, please rerun the program and input a positive number for the radius";
+				}
+				else if (height < 0)
+				{
+					cout << "Invalid input, please rerun the program and input a positive number for the radius";
+				}
+				else
+				{
+					double area = base * height * .5;
+					cout << "The area of the triangle is: " << area << endl;
+				}
+			}
+			else if (choice == 4)
+			{
+				cout << "Exiting the program...";
+			}
 		}
-		else if (weight >= 2 && weight <= 6)
+		else
 		{
-			rate = 2.20;
-			chargeTimes = miles / 500.00;
-			charges = chargeTimes * rate;
+			cout << "Your input is invalid, please input an integer from 1 to 4";
+		}
 
-			cout << "The distance you want to ship your package, in miles, is: " << miles << endl;
-			cout << "The weight of your package you want to ship, in kilograms, is: " << weight << endl;
-			cout << "The rate for the distance entered is: " << rate << "$" << endl;
-			cout << "You will be charged: " << charges << "$" << endl;
-		}
-		else if (weight >= 7 && weight <= 10)
-		{
-			rate = 3.70;
-			chargeTimes = miles / 500.00;
-			charges = chargeTimes * rate;
-
-			cout << "The distance you want to ship your package, in miles, is: " << miles << endl;
-			cout << "The weight of your package you want to ship, in kilograms, is: " << weight << endl;
-			cout << "The rate for the distance entered is: " << rate << "$" << endl;
-			cout << "You will be charged: " << charges << "$" << endl;
-		}
-		else if (weight >= 11 && weight <= 20)
-		{
-			rate = 4.80;
-			chargeTimes = miles / 500.00;
-			charges = chargeTimes * rate;
-			
-			cout << "The distance you want to ship your package, in miles, is: " << miles << endl;
-			cout << "The weight of your package you want to ship, in kilograms, is: " << weight << endl;
-			cout << "The rate for the distance entered is: " << rate << "$" << endl;
-			cout << "You will be charged: " << charges << "$" << endl;
-		}
-	}
-	else
-	{
-		cout << "Invalid input! Please rerun the progam and enter values within the given criteria.";
-	}
+	} while (choice != 4);
 	
 	return 0;
 }
