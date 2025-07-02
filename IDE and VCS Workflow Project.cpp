@@ -1,86 +1,77 @@
-// Program prompts the user to enter a month (1-12) and a year. If the month is Februrary (2), the program checks if the year enter is a leap year, then it acts accordingly
-// PS. If using a switch is better in this situation, could you let me know in your comment? Thank you in advance.
+// Program prompts the user to enter a weight (1 - 20) and a distance (10 - 3,000) then shows then what they'll be charged.
 
 #include <iostream>
+#include <iomanip>
 using namespace std;
 int main()
 {
-	int year;
-	int month;
+	double rate;
+	double miles;
+	double chargeTimes; // How many times is the mile rate charged?
+	double charges;
+	double weight;
 
-	// Get the month (1 - 12) and the year
-	cout << "Enter a month (1-12):\n";
-	cin >> month;
+	// Get weigth of the package and disance it will travel
+	cout << "Enter the weight of your package in kilograms. (Note that the company will not ship weights below 0kg, or above 20kg)\n";
+	cin >> weight;
 	cin.ignore();
 
-	cout << "Enter a year:\n";
-	cin >> year;
+	cout << "Enter the distance, in miles, the package will be shipped. (Note that the company will not ship distances less than 10mi, or greater than 3,000mi.\n";
+	cin >> miles;
 	cin.ignore();
 
-	// Check if the month is within range (1 - 12)
-	if (month >= 1 && month <= 12)
+	// Check if the weight and distance meets the criteria, then based on that display the charges.
+	if (weight > 0 && weight <= 20 && miles >= 10 && miles <= 3000)
 	{
-		if (month == 1)
+		cout << fixed << showpoint << setprecision(2);
+		if (weight < 2)
 		{
-			cout << "There are 31 days in the month January in " << year << "." << endl;
+			rate = 1.10;
+			chargeTimes = miles / 500.00;
+			charges = chargeTimes * rate;
+
+			cout << "The distance you want to ship your package, in miles, is: " << miles << endl;
+			cout << "The weight of your package you want to ship, in kilograms, is: " << weight << endl;
+			cout << "The rate for the distance entered is: " << rate << "$" << endl;
+			cout << "You will be charged: " << charges << "$" << endl;
 		}
-		else if (month == 2)
-		{	
-			// Check if the year entered is a leap year, acting accordingly.
-			if ((year % 4 == 0 && year % 100 != 0) || (year % 400 == 0))
-			{
-				cout << "There are 29 days in the month of Februrary, in the year " << year << ", since it is a leap year!" << endl;
-			}
-			else
-			{
-				cout << "There are 28 days in the month of February, in the year " << year << "." << endl;
-			}
+		else if (weight >= 2 && weight <= 6)
+		{
+			rate = 2.20;
+			chargeTimes = miles / 500.00;
+			charges = chargeTimes * rate;
+
+			cout << "The distance you want to ship your package, in miles, is: " << miles << endl;
+			cout << "The weight of your package you want to ship, in kilograms, is: " << weight << endl;
+			cout << "The rate for the distance entered is: " << rate << "$" << endl;
+			cout << "You will be charged: " << charges << "$" << endl;
+		}
+		else if (weight >= 7 && weight <= 10)
+		{
+			rate = 3.70;
+			chargeTimes = miles / 500.00;
+			charges = chargeTimes * rate;
+
+			cout << "The distance you want to ship your package, in miles, is: " << miles << endl;
+			cout << "The weight of your package you want to ship, in kilograms, is: " << weight << endl;
+			cout << "The rate for the distance entered is: " << rate << "$" << endl;
+			cout << "You will be charged: " << charges << "$" << endl;
+		}
+		else if (weight >= 11 && weight <= 20)
+		{
+			rate = 4.80;
+			chargeTimes = miles / 500.00;
+			charges = chargeTimes * rate;
 			
-		}
-		else if (month == 3)
-		{
-			cout << "There are 31 days in the month of March, in the year " << year << "." << endl;
-		}
-		else if (month == 4)
-		{
-			cout << "There are 30 days in the month of April, in the year " << year << "." << endl;
-		}
-		else if (month == 5)
-		{
-			cout << "There are 31 days in the month of May, in the year " << year << "." << endl;
-		}
-		else if (month == 6)
-		{
-			cout << "There are 30 days in the month of June, in the year " << year << "." << endl;
-		}
-		else if (month == 7)
-		{
-			cout << "There are 31 days in the month of July, in the year " << year << "." << endl;
-		}
-		else if (month == 8)
-		{
-			cout << "There are 31 days in the month of August, in the year " << year << "." << endl;
-		}
-		else if (month == 9)
-		{
-			cout << "There are 30 days in the month of September, in the year " << year << "." << endl;
-		}
-		else if (month == 10)
-		{
-			cout << "There are 31 days in the month of October, in the year " << year << "." << endl;
-		}
-		else if (month == 11)
-		{
-			cout << "There are 30 days in the month of November, in the year " << year << "." << endl;
-		}
-		else if (month == 12)
-		{
-			cout << "There are 31 days in the month of December, in the year " << year << "." << endl;
+			cout << "The distance you want to ship your package, in miles, is: " << miles << endl;
+			cout << "The weight of your package you want to ship, in kilograms, is: " << weight << endl;
+			cout << "The rate for the distance entered is: " << rate << "$" << endl;
+			cout << "You will be charged: " << charges << "$" << endl;
 		}
 	}
 	else
 	{
-		cout << "Invalid input! Please rerun the progam and enter a value between 1 and 12 for the month.";
+		cout << "Invalid input! Please rerun the progam and enter values within the given criteria.";
 	}
 	
 	return 0;
