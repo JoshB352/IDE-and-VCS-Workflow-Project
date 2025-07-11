@@ -1,4 +1,4 @@
-// Program prompts the user to enter a weight (1 - 20) and a distance (10 - 3,000) then shows then what they'll be charged.
+// Program predicts the amount of organisms in a populations based on the numbers givven
 
 #include <iostream>
 using namespace std;
@@ -8,6 +8,7 @@ int main()
 	double dailyPercent;
 	int numberOfDays;
 
+	// Collect numbers from user.
 	cout << "This program predicts the size of a population of organisms." << endl;
 	cout << "What is the starting number of organism? (Note that the starting size cannot be less than 2): ";
 	cin >> populationStart;
@@ -35,6 +36,7 @@ int main()
 		cin >> numberOfDays;
 	}
 
+	// Calculate and display numbers.
 	cout << "\nDay\tPopulation\n";
 	cout << "____________________\n";
 	int population = populationStart;
