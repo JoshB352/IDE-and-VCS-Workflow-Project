@@ -30,7 +30,7 @@ int main()
 		{
 			firstNameOnList = name;
 		}
-		if (name < lastNameOnList)
+		if (name > lastNameOnList)
 		{
 			lastNameOnList = name;
 		}
