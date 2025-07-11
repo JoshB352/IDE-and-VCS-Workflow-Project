@@ -1,48 +1,29 @@
-// Program asks for the name of a file (People.txt), 
+// Program displays a pattern.
 
 #include <iostream>
-#include <fstream>
-#include <string>
 using namespace std;
 int main()
 {
-	string nameOfFile;
-	string nameOfTown;
-
-	int population;
-	int year = 1900;
-	const int dataInterval = 20;
-
-	cout << "Please enter the name of the data file." << endl;
-	cin >> nameOfFile;
-
-	cout << "\nPlease enter the name of the town." << endl;
-	cin.ignore();
-	getline(cin, nameOfTown);
-
-	ifstream peopleFile(nameOfFile);
-	if (!peopleFile)
+	// Make pattern A
+	cout << "Here is pattern A:" << endl;
+	for (int i = 1; i <= 10; ++i)
 	{
-		cout << "Error occured! Could not open file " << nameOfFile << "." << endl;
-		return 1;
-	}
-
-	cout << "Population Growth of " << nameOfTown << "." << endl;
-	cout << "Each \"*\" represents 1,000 people." << endl;
-
-	while (peopleFile >> population)
-	{
-		cout << year << ": ";
-		for (int i = 0; i < (population / 1000); ++i)
+		for (int bruh = 1; bruh <= i; ++bruh)
 		{
-			cout << "*";
+			cout << "+";
 		}
 		cout << endl;
-		cout << "__________________________________";
-		cout << endl;
-		year += dataInterval;
 	}
 
-	peopleFile.close();
+	// Make pattern B
+	cout << "Here is pattern B:" << endl;
+	for (int i = 10; i >= 1; --i)
+	{
+		for (int bruh = 1; bruh <= i; ++bruh)
+		{
+			cout << "+";
+		}
+		cout << endl;
+	}
 	return 0;
 }
