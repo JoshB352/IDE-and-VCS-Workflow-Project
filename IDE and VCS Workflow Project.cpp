@@ -1,4 +1,4 @@
-// Program asks for the name of a file (People.txt), 
+// Program asks for the name of a file (People.txt), and using "*" for each 1,000 people.
 
 #include <iostream>
 #include <fstream>
@@ -13,6 +13,7 @@ int main()
 	int year = 1900;
 	const int dataInterval = 20;
 
+	// Get name of file
 	cout << "Please enter the name of the data file." << endl;
 	cin >> nameOfFile;
 
@@ -20,6 +21,7 @@ int main()
 	cin.ignore();
 	getline(cin, nameOfTown);
 
+	// Make sure file is found
 	ifstream peopleFile(nameOfFile);
 	if (!peopleFile)
 	{
@@ -30,6 +32,7 @@ int main()
 	cout << "Population Growth of " << nameOfTown << "." << endl;
 	cout << "Each \"*\" represents 1,000 people." << endl;
 
+	// Display population each year.
 	while (peopleFile >> population)
 	{
 		cout << year << ": ";
