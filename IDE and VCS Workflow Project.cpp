@@ -1,4 +1,4 @@
-// Program reads a list of students names off of a file (LineUp.txt). Gives the first and last person in a line, alphabetically from their first name. Also gives the number of students in the class.
+// Program asks for the name of a file (People.txt), 
 
 #include <iostream>
 #include <fstream>
@@ -6,41 +6,43 @@
 using namespace std;
 int main()
 {
-	ifstream nameFile("LineUp.txt");
-	if (!nameFile)
+	string nameOfFile;
+	string nameOfTown;
+
+	int population;
+	int year = 1900;
+	const int dataInterval = 20;
+
+	cout << "Please enter the name of the data file." << endl;
+	cin >> nameOfFile;
+
+	cout << "\nPlease enter the name of the town." << endl;
+	cin.ignore();
+	getline(cin, nameOfTown);
+
+	ifstream peopleFile(nameOfFile);
+	if (!peopleFile)
 	{
-		cerr << "Error openning file." << endl;
+		cout << "Error occured! Could not open file " << nameOfFile << "." << endl;
 		return 1;
 	}
-	string name;
-	string firstNameOnList, lastNameOnList;
-	int count = 0;
 
-	// Get first and last name from file, along with number of students.
-	if (nameFile >> name)
+	cout << "Population Growth of " << nameOfTown << "." << endl;
+	cout << "Each \"*\" represents 1,000 people." << endl;
+
+	while (peopleFile >> population)
 	{
-		firstNameOnList = name;
-		lastNameOnList = name;
-		count = 1;
-	}
-	while (nameFile >> name)
-	{
-		count++;
-		if (name < firstNameOnList)
+		cout << year << ": ";
+		for (int i = 0; i < (population / 1000); ++i)
 		{
-			firstNameOnList = name;
+			cout << "*";
 		}
-		if (name > lastNameOnList)
-		{
-			lastNameOnList = name;
-		}
+		cout << endl;
+		cout << "__________________________________";
+		cout << endl;
+		year += dataInterval;
 	}
 
-	// Output Data and close file.
-	cout << "This is the number of students: " << count << endl;
-	cout << "This is the first person in the line: " << firstNameOnList << endl;
-	cout << "This is the last person in the line: " << lastNameOnList << endl;
-
-	nameFile.close();
+	peopleFile.close();
 	return 0;
 }
