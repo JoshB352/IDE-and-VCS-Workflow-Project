@@ -1,29 +1,38 @@
-// Program displays a pattern.
+// Program generates a random number, then asks the user to try and guess that number, telling them to go lower or higher depending on the input. When guessed, the program displays the ammount of attempts it took.
 
 #include <iostream>
+#include <random>
 using namespace std;
 int main()
 {
-	// Make pattern A
-	cout << "Here is pattern A:" << endl;
-	for (int i = 1; i <= 10; ++i)
-	{
-		for (int bruh = 1; bruh <= i; ++bruh)
-		{
-			cout << "+";
-		}
-		cout << endl;
-	}
+	const int min = 1;
+	const int max = 100;
 
-	// Make pattern B
-	cout << "Here is pattern B:" << endl;
-	for (int i = 10; i >= 1; --i)
+	random_device engine;
+
+	uniform_int_distribution<int> numberGenerated(min, max);
+
+	int randomNumber = numberGenerated(engine);
+	int numberGuessed;
+	int guessAmount = 0;
+
+	cout << "Guess a number between 1 and 100: ";
+
+	do
 	{
-		for (int bruh = 1; bruh <= i; ++bruh)
+		cin >> numberGuessed;
+		guessAmount++;
+
+		if (numberGuessed > randomNumber)
 		{
-			cout << "+";
+			cout << "Lower: ";
 		}
-		cout << endl;
-	}
+		else if (numberGuessed < randomNumber)
+		{
+			cout << "Higher: ";
+		}
+	} while (numberGuessed != randomNumber);
+
+	cout << "You guessed right! It took you " << guessAmount << " attempts to guess " << randomNumber << "." << endl;
 	return 0;
 }
