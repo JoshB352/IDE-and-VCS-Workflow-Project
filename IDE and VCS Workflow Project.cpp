@@ -1,48 +1,46 @@
-// Program prompts the user to enter a weight (1 - 20) and a distance (10 - 3,000) then shows then what they'll be charged.
+// Program reads a list of students names off of a file (LineUp.txt). Gives the first and last person in a line, alphabetically from their first name. Also gives the number of students in the class.
 
 #include <iostream>
+#include <fstream>
+#include <string>
 using namespace std;
 int main()
 {
-	int populationStart;
-	double dailyPercent;
-	int numberOfDays;
-
-	cout << "This program predicts the size of a population of organisms." << endl;
-	cout << "What is the starting number of organism? (Note that the starting size cannot be less than 2): ";
-	cin >> populationStart;
-	while (populationStart < 2)
+	ifstream nameFile("LineUp.txt");
+	if (!nameFile)
 	{
-		cout << "\nInvalid input. Please enter a number that is greater than or equal to 2: ";
-		cin >> populationStart;
+		cerr << "Error openning file." << endl;
+		return 1;
 	}
-	cin.ignore();
+	string name;
+	string firstNameOnList, lastNameOnList;
+	int count = 0;
 
-	cout << "\nWhat is the average daily population increase (Note that a negative number will not be accepted by the program): ";
-	cin >> dailyPercent;
-	while (dailyPercent < 0)
+	// Get first and last name from file, along with number of students.
+	if (nameFile >> name)
 	{
-		cout << "\nInvalid input. Please enter a number that is not negative: ";
-		cin >> dailyPercent;
+		firstNameOnList = name;
+		lastNameOnList = name;
+		count = 1;
 	}
-	cin.ignore();
-
-	cout << "\nWhat is the number of days they will multiply for (Note that the number of days cannot be less than 1): ";
-	cin >> numberOfDays;
-	while (numberOfDays < 1)
+	while (nameFile >> name)
 	{
-		cout << "\nInvalid input. Please enter a number that is greater than or equal to 1: ";
-		cin >> numberOfDays;
+		count++;
+		if (name < firstNameOnList)
+		{
+			firstNameOnList = name;
+		}
+		if (name < lastNameOnList)
+		{
+			lastNameOnList = name;
+		}
 	}
 
-	cout << "\nDay\tPopulation\n";
-	cout << "____________________\n";
-	int population = populationStart;
+	// Output Data and close file.
+	cout << "This is the number of students: " << count << endl;
+	cout << "This is the first person in the line: " << firstNameOnList << endl;
+	cout << "This is the last person in the line: " << lastNameOnList << endl;
 
-	for (int day = 1; day <= numberOfDays; ++day)
-	{
-		cout << day << "\t" << population << endl;
-		population += (population * (dailyPercent / 100));
-	}
+	nameFile.close();
 	return 0;
 }
