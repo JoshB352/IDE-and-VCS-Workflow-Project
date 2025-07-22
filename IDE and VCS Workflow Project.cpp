@@ -1,77 +1,57 @@
-// This program gets the length and width of a rectangle, then calculates and displays its perimeter and area
+// This program determines the safest driving region in the city based on the number of accidents reported for each region during the past year.
 
 #include <iostream>
 using namespace std;
 
-void getLength_Width(double& length, double& width);\
-double calcPerimeter(double length, double width);
-double calcArea(double length, double width);
-void displayProperties(double perimeter, double area);
+void getRegInfo(string& regionName, int& accidents);
+bool isLower(int a, int b);
+void showLowest(const string& regionName, int accidents);
 
-int main()
-{
-	char askToContinue;
-	double perimeter, area;
-	double length, width;
+int main() {
+    const int numberOfRegions = 5;
+    string regionName, lowestRegion;
+    int accidents, lowestAccidents;
 
-	 do {
-        getLength_Width(length, width);
-        perimeter = calcPerimeter(length, width);
-        area = calcArea(length, width);
-        displayProperties(perimeter, area);
+    getRegInfo(regionName, accidents);
+    lowestRegion = regionName;
+    lowestAccidents = accidents;
 
-        cout << "\nDo you want continue the program? Type 'y' for YES, or 'n' for NO: ";
-        cin >> askToContinue;
-        askToContinue = toupper(askToContinue);
-    } while (askToContinue == 'Y');
+    for (int i = 1; i < numberOfRegions; ++i) 
+    {
+        getRegInfo(regionName, accidents);
+        if (isLower(accidents, lowestAccidents)) 
+        {
+            lowestRegion = regionName;
+            lowestAccidents = accidents;
+        }
+    }
 
-    cout << "Terminat(or)ed..." << endl;
+    showLowest(lowestRegion, lowestAccidents);
     return 0;
 }
 
-/*
- This function prompts the user to enter the length and width of a rectangle and validates the input. It returns both quantities back to the calling function. Validation – length and width must be > 0.
-(Note – Since this function returns two values, the parameters must be passed by reference).
- */
-void getLength_Width(double& length, double& width) {
-    do {
-        cout << "Enter the length of the rectangle: ";
-        cin >> length;
-        if (length <= 0)
-            cout << "Invalid input. Please enter a length that is positive and greater than 0.\n";
-    } while (length <= 0);
+// This function gets the name of a region and the number of accidents that occurred in that region during the past year. The number of accidents must be greater than or equal 0.
+void getRegInfo(string& regionName, int& accidents) {
+    cout << "Enter the name of a region: ";
+    cin >> regionName;
 
     do {
-        cout << "Enter the width of the rectangle: ";
-        cin >> width;
-        if (width <= 0)
-            cout << "Invalid input. Please enter a width that is positive and greater than 0.\n";
-    } while (width <= 0);
+        cout << "Enter number of accidents that occured in " << regionName << ": ";
+        cin >> accidents;
+        if (accidents < 0)
+            cout << "Invalid input. Number of accidents must be greater than or equal to 0.\n";
+    } while (accidents < 0);
+}
+
+// This function takes two integer values as input, it returnsa bool value that is true if the first value is <= the second value, otherwise the bool value returns false.
+bool isLower(int a, int b) {
+    return a <= b;
 }
 
 /*
- This function takes as input the length and width of a rectangle, calculates the perimeter, and returns the result of the calculation to the caller.
-(Note – This function assumes that the length and width are provided and that the values have been validated. This function returns the perimeter to the calling function which then decides what to do with the value)
- */
-double calcPerimeter(double length, double width) {
-    return 2 * (length + width);
-}
-
-/*
- This function takes as input the length and width of a rectangle, calculates the area and returns the area to the caller.
-(Note – This function assumes that the length and width are provided and that the values have been validated. This function returns the perimeter to the calling function which then decides what to do with the value.)
- */
-double calcArea(double length, double width) {
-    return length * width;
-}
-
-/*
- This function takes as input the perimeter and area of a rectangle and displays these values on the monitor.
+ This function gets the name of the region with the lowest reported accidents for the year and the number of accidents for that region. It displays these values on the number.
 (Note – this function does not return anything to the caller, so the postcondition is that it writes the values to the display).
  */
-void displayProperties(double perimeter, double area) {
-    cout << "\nRectangle Properties:";
-    cout << "\nPerimeter: " << perimeter;
-    cout << "\nArea: " << area << endl;
+void showLowest(const string& regionName, int accidents) {
+    cout << "\nThe region with the least amount of reported accidents is " << regionName << " with " << accidents << " reported accidents." << endl;
 }
-
