@@ -1,6 +1,7 @@
 // This program determines the safest driving region in the city based on the number of accidents reported for each region during the past year.
 
 #include <iostream>
+#include <string>
 using namespace std;
 
 void getRegInfo(string& regionName, int& accidents);
