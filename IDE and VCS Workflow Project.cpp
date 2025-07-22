@@ -1,57 +1,31 @@
-// This program determines the safest driving region in the city based on the number of accidents reported for each region during the past year.
+/*
+ This program produces a table showing degrees Fahrenheit between the values of 0 and 20 with the corresponding Celsius value.
+ The table has a title, the columns are labeled, and the temperature values are right aligned in each column. 
+ Temperature values are displayed with one decimal point of precision.
+*/
 
 #include <iostream>
+#include <iomanip>
 using namespace std;
 
-void getRegInfo(string& regionName, int& accidents);
-bool isLower(int a, int b);
-void showLowest(const string& regionName, int accidents);
+const int minimumFahrenheit = 0;
+const int maximumFahrenheit = 20;
+
+// This takes as input a temperature value in degrees Fahrenheit and returns the equivalent value of the temperature in degrees Celsius.
+double getCelsius(int fahrenheit) {
+    return (5.0 / 9) * (fahrenheit - 32);
+}
 
 int main() {
-    const int numberOfRegions = 5;
-    string regionName, lowestRegion;
-    int accidents, lowestAccidents;
+    cout << "Fahrenheit Converted to Celsius (0f to 20f)\n";
+    cout << setw(12) << "Fahrenheit" << setw(12) << "Celsius" << endl;
+    cout << "---------------------------\n";
 
-    getRegInfo(regionName, accidents);
-    lowestRegion = regionName;
-    lowestAccidents = accidents;
-
-    for (int i = 1; i < numberOfRegions; ++i) 
+    for (int fahrenheit = minimumFahrenheit; fahrenheit <= maximumFahrenheit; ++fahrenheit) 
     {
-        getRegInfo(regionName, accidents);
-        if (isLower(accidents, lowestAccidents)) 
-        {
-            lowestRegion = regionName;
-            lowestAccidents = accidents;
-        }
+        double celsius = getCelsius(fahrenheit);
+        cout << setw(12) << fahrenheit << setw(12) << fixed << setprecision(1) << celsius << endl;
     }
 
-    showLowest(lowestRegion, lowestAccidents);
     return 0;
-}
-
-// This function gets the name of a region and the number of accidents that occurred in that region during the past year. The number of accidents must be greater than or equal 0.
-void getRegInfo(string& regionName, int& accidents) {
-    cout << "Enter the name of a region: ";
-    cin >> regionName;
-
-    do {
-        cout << "Enter number of accidents that occured in " << regionName << ": ";
-        cin >> accidents;
-        if (accidents < 0)
-            cout << "Invalid input. Number of accidents must be greater than or equal to 0.\n";
-    } while (accidents < 0);
-}
-
-// This function takes two integer values as input, it returnsa bool value that is true if the first value is <= the second value, otherwise the bool value returns false.
-bool isLower(int a, int b) {
-    return a <= b;
-}
-
-/*
- This function gets the name of the region with the lowest reported accidents for the year and the number of accidents for that region. It displays these values on the number.
-(Note – this function does not return anything to the caller, so the postcondition is that it writes the values to the display).
- */
-void showLowest(const string& regionName, int accidents) {
-    cout << "\nThe region with the least amount of reported accidents is " << regionName << " with " << accidents << " reported accidents." << endl;
 }
