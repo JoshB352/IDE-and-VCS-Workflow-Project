@@ -1,71 +1,102 @@
-// This program calculates a performer’s score. Five judges each contribute a score, the highest and lowest score is dropped and the remaining three are averaged
+// This program provides an estimate for painting including cost for paint, cost for labor, gallons of paint required, number of labor hours
 
 #include <iostream>
 #include <iomanip>
 using namespace std;
 
-double getScore();
-bool isLower(double a, double b);
-bool isHigher(double a, double b);
-double calcAverage(double total, double minimumScore, double maximumScore);
+
+const double gallonPerSqft = 110.0;
+const double laborPerSqft = 8.0;
+const double hourlyLaborRate = 25.0;
+
+
+int getRooms();
+double getSqFt(int roomNumber);
+double getPricePerGallon(int roomNumber);
+int gallonsForRoom(double sqft);
+double laborHoursForRoom(double sqft);
+void displayEstimate(double paintCharge, int gallonsNeeded, double laborCharge, double laborHours);
+
 
 int main() {
-    const int amountOfJudges = 5;
-    double score, total = 0;
-    double minimumScore, maximumScore, averageScore;
+    int numberOfRooms = getRooms();
+    double totalPaintCharge = 0.0, totalLaborCharge = 0.0;
+    int totalGallonsNeeded = 0;
+    double totalLaborHours = 0.0;
 
-    score = getScore();
-    minimumScore = maximumScore = score;
-    total += score;
+    for (int i = 1; i <= numberOfRooms; ++i) {
+        double sqft = getSqFt(i);
+        double paintPrice = getPricePerGallon(i);
 
-    for (int i = 1; i < amountOfJudges; ++i)
-    {
-        score = getScore();
-        total += score;
+        int gallons = gallonsForRoom(sqft);
+        double laborHours = laborHoursForRoom(sqft);
 
-        if (isLower(score, minimumScore))
-            minimumScore = score;
-        if (isHigher(score, maximumScore))
-            maximumScore = score;
+        totalGallonsNeeded += gallons;
+        totalPaintCharge += gallons * paintPrice;
+        totalLaborHours += laborHours;
+        totalLaborCharge += laborHours * hourlyLaborRate;
     }
 
-    averageScore = calcAverage(total, minimumScore, maximumScore);
-
-    cout << fixed << setprecision(2);
-    cout << "\nFinal average score (after excluding the highest and lowest scores): " << averageScore << endl;
-
+    displayEstimate(totalPaintCharge, totalGallonsNeeded, totalLaborCharge, totalLaborHours);
     return 0;
 }
 
-// This functions asks the user to enter one of the five judge's scores, returnging a score within the range of 0 to 10 based on the users input.
-
-double getScore() {
-    double score;
-    do 
-    {
-        cout << "Enter the judge's given score. Scores range from 0 to 10: ";
-        cin >> score;
-        if (score < 0.0 || score > 10.0)
-            cout << "Invalid input, the score must be between 0 and 10.\n";
-    } while (score < 0.0 || score > 10.0);
-    return score;
+// Asks the user for the number of rooms, which cannot be 0.
+int getRooms() {
+    int rooms;
+    do {
+        cout << "Enter the number of rooms that will be painted: ";
+        cin >> rooms;
+        if (rooms < 1)
+            cout << "Invalid input, there must be at least 1 room.\n";
+    } while (rooms < 1);
+    return rooms;
 }
 
-// This function takes two integer values as input, it returns true if the first value is <= the second value, otherwise it returns false.
+// Gets and validates the square footage of a specific room, which cannot be 0.
 
-bool isLower(double a, double b) {
-    return a <= b;
+double getSqFt(int roomNumber) {
+    double sqft;
+    do {
+        cout << "Enter the number of square feet for room " << roomNumber << ": ";
+        cin >> sqft;
+        if (sqft <= 0)
+            cout << "Invalid input, the numebr of square feet must be greater than 0.\n";
+    } while (sqft <= 0);
+    return sqft;
 }
 
-// This function takes two integer values as input, it returns true if the first value is >= the second value, otherwise it returns false.
-bool isHigher(double a, double b) {
-    return a >= b;
+// Gets and validates the price of paint per gallon for a specific room. The price cannot be under $10
+double getPricePerGallon(int roomNumber) {
+    double price;
+    do {
+        cout << "Enter price, per gallon, of paint for room " << roomNumber << ": ";
+        cin >> price;
+        if (price < 10.0)
+            cout << "Invalid input, the price must be at least $10.00.\n";
+    } while (price < 10.0);
+    return price;
 }
 
-/*
- This function takes as input the total of all the scores, the number of scores, the minimum score value and the maximum score value.
- It returns the average of the three middle scores by subtracting out the minimum and maximum scores from the total.
- */
-double calcAverage(double total, double minimumScore, double maximumScore) {
-    return (total - minimumScore - maximumScore) / 3.0;
+//Calculates the number of gallons needed, then rounds up to the next whole number.
+int gallonsForRoom(double sqft) {
+    return static_cast<int>(ceil(sqft / gallonPerSqft));
+}
+
+// Calculates amount labor hours based on how many square feet the room is.
+double laborHoursForRoom(double sqft) {
+    return (sqft / gallonPerSqft) * laborPerSqft;
+}
+
+// Displays the full paint job estimate. The gallons, labor hours, labor cost, paint cost, number of rooms, and total cost.
+void displayEstimate(double paintCharge, int gallonsNeeded, double laborCharge, double laborHours) {
+    double totalCost = paintCharge + laborCharge;
+
+    cout << fixed << setprecision(2);
+    cout << "\nPaint Job Estimate:\n";
+    cout << "Gallons of paint to purchase: " << gallonsNeeded << endl;
+    cout << "Number of hours required to pain rooms: " << laborHours << endl;
+    cout << "Cost of paint: $" << paintCharge << endl;
+    cout << "Cost of labor: $" << laborCharge << endl;
+    cout << "Total cost for job: $" << totalCost << endl;
 }
